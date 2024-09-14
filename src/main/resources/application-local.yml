@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: effycity-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+#spring.jpa.hibernate.ddl-auto=create
+  flyway:
+    url: jdbc:postgresql://localhost:5432/postgres
+    user: postgres
+    password: postgres
+
+  security:
+    oauth2:
+      client:
+        registration:
+  # GitHub login
+          github:
+            client-id:
+            client-secret:
+  #Google Login
+          google:
+            client-id:
+            client-secret:
+
+logging:
+  level:
+    org:
+      springframework:
+        security: TRACE

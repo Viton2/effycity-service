@@ -1,0 +1,15 @@
+volumes:
+  postgres_data:
+    driver: local
+
+services:
+  db:
+    image: postgres
+    container_name: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5432:5432'
