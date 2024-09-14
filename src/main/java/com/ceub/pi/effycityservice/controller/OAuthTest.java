@@ -13,10 +13,10 @@ import java.util.Scanner;
 @RequestMapping
 public class OAuthTest {
 
-    @GetMapping("/")
-    public String test(){
-        return "Hello World!";
-    }
+//    @GetMapping("/")
+//    public String test(){
+//        return "Hello World!";
+//    }
 
     @GetMapping("/secured")
     public String secured(){
