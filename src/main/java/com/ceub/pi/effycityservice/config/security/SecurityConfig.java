@@ -28,59 +28,44 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         return http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> {
-                    auth.requestMatchers("/",
+                    auth.requestMatchers("/**",
                                     "/swagger-ui/index.html",
                                     "/login")
                             .permitAll();
-                    auth.anyRequest().authenticated();
                 })
-//                .oauth2Login(oauth2 -> oauth2
-//                        .loginPage("/login")
-//                        .loginProcessingUrl("/login")
-//                        .defaultSuccessUrl("/secured")
-//                        .permitAll())
-//                .httpBasic(withDefaults())
-                .formLogin(form -> form
-                        .loginPage("/login")
-                        .loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/login")
-                        .permitAll())
-                .logout(logout -> logout
-                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                        .permitAll())
                 .build();
     }
 
-    @Bean
-    public static PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
+//    @Bean
+//    public static PasswordEncoder passwordEncoder(){
+//        return new BCryptPasswordEncoder();
+//    }
 
-    @Bean
-    public AuthenticationManager authenticationManager(
-            UserDetailsService userDetailsService,
-            PasswordEncoder passwordEncoder) {
-        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsService(userDetailsService);
-        authenticationProvider.setPasswordEncoder(passwordEncoder);
+//    @Bean
+//    public AuthenticationManager authenticationManager(
+//            UserDetailsService userDetailsService,
+//            PasswordEncoder passwordEncoder) {
+//        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+//        authenticationProvider.setUserDetailsService(userDetailsService);
+//        authenticationProvider.setPasswordEncoder(passwordEncoder);
+//
+//        ProviderManager providerManager = new ProviderManager(authenticationProvider);
+//        providerManager.setEraseCredentialsAfterAuthentication(false);
+//
+//        return providerManager;
+//    }
+//
+//    PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
-        ProviderManager providerManager = new ProviderManager(authenticationProvider);
-        providerManager.setEraseCredentialsAfterAuthentication(false);
-
-        return providerManager;
-    }
-
-    PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
 
-
-    @Bean
-    public UserDetailsService userDetailsService() {
-        UserDetails userDetails = User.withUsername("user")
-                .password(encoder.encode("password"))
-                .roles("USER").build();
-        return new InMemoryUserDetailsManager(userDetails);
-    }
+//    @Bean
+//    public UserDetailsService userDetailsService() {
+//        UserDetails userDetails = User.withUsername("user")
+//                .password(encoder.encode("password"))
+//                .roles("USER").build();
+//        return new InMemoryUserDetailsManager(userDetails);
+//    }
 
 //    @Bean
 //    public PasswordEncoder passwordEncoder() {
