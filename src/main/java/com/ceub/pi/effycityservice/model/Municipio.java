@@ -1,5 +1,6 @@
 package com.ceub.pi.effycityservice.model;
 
+import com.ceub.pi.effycityservice.DTO.EstadoDTO;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
@@ -30,10 +31,10 @@ public class Municipio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ColumnDefault("nextval('tb_municipio_pk_municipio_seq'")
     @Column(name = "pk_municipio", nullable = false)
-    private Integer id;
+    private Long id;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @ColumnDefault("nextval('tb_municipio_fk_estado_seq'")
     @JoinColumn(name = "fk_estado", nullable = false)
 //    @JsonBackReference()

@@ -27,7 +27,7 @@ public class Projeto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ColumnDefault("nextval('tb_projeto_pk_projeto_seq'")
     @Column(name = "pk_projeto", nullable = false)
-    private Integer id;
+    private Long id;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

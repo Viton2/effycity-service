@@ -26,7 +26,7 @@ public class Estado {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ColumnDefault("nextval('tb_estado_pk_estado_seq'")
     @Column(name = "pk_estado", nullable = false)
-    private Integer id;
+    private Long id;
 
     @Size(max = 2)
     @NotNull

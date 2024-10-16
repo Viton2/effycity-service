@@ -28,7 +28,7 @@ public class UsuarioGestorService {
         return mapper.convertValue(usuarioGestor, UsuarioGestorDTO.class);
     }
 
-    private UsuarioGestor validateUsuarioGestorExists(Integer id) {
+    private UsuarioGestor validateUsuarioGestorExists(Long id) {
         Optional<UsuarioGestor> usuarioGestor = usuarioGestorRepository.findById(id);
         if (usuarioGestor.isPresent()) {
             return usuarioGestor.get();
@@ -41,7 +41,7 @@ public class UsuarioGestorService {
     }
 
     // Retrieve a UsuarioGestor by ID
-    public Optional<UsuarioGestor> getUsuarioGestorById(Integer id) {
+    public Optional<UsuarioGestor> getUsuarioGestorById(Long id) {
         return Optional.of(validateUsuarioGestorExists(id));
     }
 
@@ -54,12 +54,12 @@ public class UsuarioGestorService {
     }
 
     // Delete a UsuarioGestor by ID
-    public void deleteUsuarioGestorById(Integer id) {
+    public void deleteUsuarioGestorById(Long id) {
         usuarioGestorRepository.deleteById(id);
     }
 
     // Update an existing UsuarioGestor
-    public Optional<UsuarioGestor> updateUsuarioGestor(Integer id, UsuarioGestor usuarioGestorDetails) {
+    public Optional<UsuarioGestor> updateUsuarioGestor(Long id, UsuarioGestor usuarioGestorDetails) {
         return usuarioGestorRepository.findById(id).map(existingUsuarioGestor -> {
             existingUsuarioGestor.setUsuario(usuarioGestorDetails.getUsuario());
             existingUsuarioGestor.setEmail(usuarioGestorDetails.getEmail());

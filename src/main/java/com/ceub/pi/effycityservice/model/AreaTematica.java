@@ -24,7 +24,7 @@ public class AreaTematica {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ColumnDefault("nextval('tb_area_tematica_pk_area_tematica_seq'")
     @Column(name = "pk_area_tematica", nullable = false)
-    private Integer id;
+    private Long id;
 
     @Size(max = 100)
     @Column(name = "ds_area_tematica", length = 100)

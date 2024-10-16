@@ -27,8 +27,11 @@ import java.util.Optional;
 @RequestMapping("/api/area-tematica")
 public class AreaTematicaController {
 
-    @Autowired
-    private AreaTematicaService areaTematicaService;
+    private final AreaTematicaService areaTematicaService;
+
+    public AreaTematicaController(AreaTematicaService areaTematicaService) {
+        this.areaTematicaService = areaTematicaService;
+    }
 
     // Create a new AreaTematica
     @PostMapping
@@ -39,7 +42,7 @@ public class AreaTematicaController {
 
     // Get an AreaTematica by ID
     @GetMapping("/{id}")
-    public ResponseEntity<AreaTematica> getAreaTematicaById(@PathVariable Integer id) {
+    public ResponseEntity<AreaTematica> getAreaTematicaById(@PathVariable Long id) {
         Optional<AreaTematica> areaTematica = areaTematicaService.getAreaTematicaById(id);
         return areaTematica.map(ResponseEntity::ok)
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -54,7 +57,7 @@ public class AreaTematicaController {
 
     // Update an AreaTematica
     @PutMapping("/{id}")
-    public ResponseEntity<AreaTematica> updateAreaTematica(@PathVariable Integer id, @RequestBody AreaTematica areaTematicaDetails) {
+    public ResponseEntity<AreaTematica> updateAreaTematica(@PathVariable Long id, @RequestBody AreaTematica areaTematicaDetails) {
         Optional<AreaTematica> existingAreaTematica = areaTematicaService.getAreaTematicaById(id);
         if (existingAreaTematica.isPresent()) {
             AreaTematica areaTematica = existingAreaTematica.get();
@@ -68,7 +71,7 @@ public class AreaTematicaController {
 
     // Delete an AreaTematica by ID
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteAreaTematica(@PathVariable Integer id) {
+    public ResponseEntity<Void> deleteAreaTematica(@PathVariable Long id) {
         Optional<AreaTematica> areaTematica = areaTematicaService.getAreaTematicaById(id);
         if (areaTematica.isPresent()) {
             areaTematicaService.deleteAreaTematicaById(id);

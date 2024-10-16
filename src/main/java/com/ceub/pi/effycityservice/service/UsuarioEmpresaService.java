@@ -1,6 +1,7 @@
 package com.ceub.pi.effycityservice.service;
 
 import com.ceub.pi.effycityservice.DTO.UsuarioEmpresaDTO;
+import com.ceub.pi.effycityservice.exception.UsuarioEmpresaNotFoundException;
 import com.ceub.pi.effycityservice.model.UsuarioEmpresa;
 import com.ceub.pi.effycityservice.repository.UsuarioEmpresaRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -25,11 +26,11 @@ public class UsuarioEmpresaService {
         return mapper.convertValue(usuarioEmpresa, UsuarioEmpresaDTO.class);
     }
 
-    private Optional<UsuarioEmpresa> validateUsuarioEmpresaExists(Integer id) throws ClassNotFoundException {
+    private Optional<UsuarioEmpresa> validateUsuarioEmpresaExists(Long id) {
         Optional<UsuarioEmpresa> usuarioEmpresa = usuarioEmpresaRepository.findById(id);
         if (usuarioEmpresa.isPresent()){
             return usuarioEmpresa;
-        }throw new ClassNotFoundException();
+        }throw new UsuarioEmpresaNotFoundException();
     }
 
     // Create or Update UsuarioEmpresa
@@ -38,11 +39,11 @@ public class UsuarioEmpresaService {
     }
 
     // Retrieve UsuarioEmpresa by ID
-    public Optional<UsuarioEmpresa> getUsuarioEmpresaById(Integer id) {
+    public Optional<UsuarioEmpresa> getUsuarioEmpresaById(Long id) {
         return usuarioEmpresaRepository.findById(id);
     }
 
-    public UsuarioEmpresa updateUsuarioEmpresa(Integer id, UsuarioEmpresa usuarioEmpresa) throws ClassNotFoundException {
+    public UsuarioEmpresa updateUsuarioEmpresa(Long id, UsuarioEmpresa usuarioEmpresa){
         UsuarioEmpresa empresaOptional = validateUsuarioEmpresaExists(id).get();
         empresaOptional.setUsuario(usuarioEmpresa.getUsuario());
         empresaOptional.setDsEmail(usuarioEmpresa.getDsEmail());
@@ -66,7 +67,7 @@ public class UsuarioEmpresaService {
     }
 
     // Delete UsuarioEmpresa by ID
-    public void deleteUsuarioEmpresaById(Integer id) {
+    public void deleteUsuarioEmpresaById(Long id) {
         usuarioEmpresaRepository.deleteById(id);
     }
 }

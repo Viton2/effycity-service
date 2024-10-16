@@ -23,8 +23,11 @@ import java.util.Optional;
 @RequestMapping("/api/projetos")
 public class ProjectController {
 
-    @Autowired
-    private ProjectService projetoService;
+    private final ProjectService projetoService;
+
+    public ProjectController(ProjectService projetoService) {
+        this.projetoService = projetoService;
+    }
 
     // Create a new Project
     @PostMapping
@@ -35,7 +38,7 @@ public class ProjectController {
 
     // Get a Project by ID
     @GetMapping("/{id}")
-    public ResponseEntity<ProjetoDTO> getProjetoById(@PathVariable Integer id) {
+    public ResponseEntity<ProjetoDTO> getProjetoById(@PathVariable Long id) {
         Optional<ProjetoDTO> projeto = projetoService.getProjetoById(id);
         return projeto.map(ResponseEntity::ok)
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -51,7 +54,7 @@ public class ProjectController {
     // Update a Project
     // Update a Project
     @PutMapping("/{id}")
-    public ResponseEntity<ProjetoDTO> updateProjeto(@PathVariable Integer id, @RequestBody ProjetoDTO projetoDetails) {
+    public ResponseEntity<ProjetoDTO> updateProjeto(@PathVariable Long id, @RequestBody ProjetoDTO projetoDetails) {
         Optional<ProjetoDTO> updatedProjeto = projetoService.updateProjeto(id, projetoDetails);
         return updatedProjeto
                 .map(projeto -> new ResponseEntity<>(projeto, HttpStatus.OK))
@@ -60,7 +63,7 @@ public class ProjectController {
 
     // Delete a Project by ID
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProjeto(@PathVariable Integer id) {
+    public ResponseEntity<Void> deleteProjeto(@PathVariable Long id) {
         projetoService.deleteProjetoById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

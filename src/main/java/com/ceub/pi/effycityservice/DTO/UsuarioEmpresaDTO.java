@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 public class UsuarioEmpresaDTO {
 
-    private Integer id;
+    private Long id;
 
     @Size(max = 100)
     @NotNull

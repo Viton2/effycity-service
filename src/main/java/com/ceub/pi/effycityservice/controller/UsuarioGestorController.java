@@ -11,12 +11,30 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+/*
+ {
+  "usuario": "Joao Oliveira",
+  "email": "joao.oliveira@orgao.gov.br",
+  "cargo": "Analista de Projetos",
+  "orgao": "Secretaria de Educação",
+  "telefone": "1198753423",
+  "municipio": {
+    "id": 13
+  },
+  "estado": {
+    "id": 11
+  }
+}*/
+
 @RestController
 @RequestMapping("/api/usuario-gestor")
 public class UsuarioGestorController {
 
-    @Autowired
-    private UsuarioGestorService usuarioGestorService;
+    private final UsuarioGestorService usuarioGestorService;
+
+    public UsuarioGestorController(UsuarioGestorService usuarioGestorService) {
+        this.usuarioGestorService = usuarioGestorService;
+    }
 
     // Create a new UsuarioGestor
     @PostMapping(consumes = "application/json", produces = "application/json")
@@ -27,7 +45,7 @@ public class UsuarioGestorController {
 
     // Get a UsuarioGestor by ID
     @GetMapping("/{id}")
-    public ResponseEntity<UsuarioGestor> getUsuarioGestorById(@PathVariable Integer id) {
+    public ResponseEntity<UsuarioGestor> getUsuarioGestorById(@PathVariable Long id) {
         Optional<UsuarioGestor> usuarioGestor = usuarioGestorService.getUsuarioGestorById(id);
         return usuarioGestor.map(ResponseEntity::ok)
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -42,7 +60,7 @@ public class UsuarioGestorController {
 
     // Update a UsuarioGestor by ID
     @PutMapping("/{id}")
-    public ResponseEntity<UsuarioGestor> updateUsuarioGestor(@PathVariable Integer id, @RequestBody UsuarioGestor usuarioGestorDetails) {
+    public ResponseEntity<UsuarioGestor> updateUsuarioGestor(@PathVariable Long id, @RequestBody UsuarioGestor usuarioGestorDetails) {
         Optional<UsuarioGestor> updatedUsuarioGestor = usuarioGestorService.updateUsuarioGestor(id, usuarioGestorDetails);
         return updatedUsuarioGestor.map(usuarioGestor -> new ResponseEntity<>(usuarioGestor, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -50,7 +68,7 @@ public class UsuarioGestorController {
 
     // Delete a UsuarioGestor by ID
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUsuarioGestor(@PathVariable Integer id) throws ClassNotFoundException {
+    public ResponseEntity<Void> deleteUsuarioGestor(@PathVariable Long id) {
         Optional<UsuarioGestor> usuarioGestor = usuarioGestorService.getUsuarioGestorById(id);
         if (usuarioGestor.isPresent()) {
             usuarioGestorService.deleteUsuarioGestorById(id);

@@ -33,8 +33,11 @@ import java.util.Optional;
 @RequestMapping("/api/usuario-empresa")
 public class UsuarioEmpresaController {
 
-    @Autowired
-    private UsuarioEmpresaService usuarioEmpresaService;
+    private final UsuarioEmpresaService usuarioEmpresaService;
+
+    public UsuarioEmpresaController(UsuarioEmpresaService usuarioEmpresaService) {
+        this.usuarioEmpresaService = usuarioEmpresaService;
+    }
 
     // Create a new UsuarioEmpresa
     @PostMapping
@@ -45,7 +48,7 @@ public class UsuarioEmpresaController {
 
     // Get a UsuarioEmpresa by ID
     @GetMapping("/{id}")
-    public ResponseEntity<UsuarioEmpresa> getUsuarioEmpresaById(@PathVariable Integer id) {
+    public ResponseEntity<UsuarioEmpresa> getUsuarioEmpresaById(@PathVariable Long id) {
         Optional<UsuarioEmpresa> usuarioEmpresa = usuarioEmpresaService.getUsuarioEmpresaById(id);
         return usuarioEmpresa.map(ResponseEntity::ok)
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -60,7 +63,7 @@ public class UsuarioEmpresaController {
 
     // Update a UsuarioEmpresa
     @PutMapping("/{id}")
-    public ResponseEntity<UsuarioEmpresa> updateUsuarioEmpresa(@PathVariable Integer id, @RequestBody UsuarioEmpresa usuarioEmpresaDetails) throws ClassNotFoundException {
+    public ResponseEntity<UsuarioEmpresa> updateUsuarioEmpresa(@PathVariable Long id, @RequestBody UsuarioEmpresa usuarioEmpresaDetails) {
         UsuarioEmpresa updatedUsuarioEmpresa = usuarioEmpresaService.updateUsuarioEmpresa(id, usuarioEmpresaDetails);
         if (updatedUsuarioEmpresa != null) {
             return new ResponseEntity<>(updatedUsuarioEmpresa, HttpStatus.OK);
@@ -71,7 +74,7 @@ public class UsuarioEmpresaController {
 
     // Delete a UsuarioEmpresa by ID
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUsuarioEmpresa(@PathVariable Integer id) {
+    public ResponseEntity<Void> deleteUsuarioEmpresa(@PathVariable Long id) {
         Optional<UsuarioEmpresa> usuarioEmpresa = usuarioEmpresaService.getUsuarioEmpresaById(id);
         if (usuarioEmpresa.isPresent()) {
             usuarioEmpresaService.deleteUsuarioEmpresaById(id);

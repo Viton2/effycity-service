@@ -2,6 +2,7 @@ package com.ceub.pi.effycityservice.config.handler;
 
 import com.ceub.pi.effycityservice.exception.EstadoNotFoundException;
 import com.ceub.pi.effycityservice.exception.MunicipioNotFoundException;
+import com.ceub.pi.effycityservice.exception.UsuarioEmpresaNotFoundException;
 import com.ceub.pi.effycityservice.exception.UsuarioGestorNotFoundException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.fasterxml.jackson.databind.exc.PropertyBindingException;
@@ -48,6 +49,14 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     }
     @ExceptionHandler(EstadoNotFoundException.class)
     public ResponseEntity<?> handleEstadoNotFoundException(EstadoNotFoundException ex, WebRequest request){
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        ProblemType problemType = ProblemType.ENTITY_NOT_FOUND;
+        String message = ex.getMessage();
+        ApiError apiError = createProblemBuilder(status, problemType, message).build();
+        return handleExceptionInternal(ex, apiError, new HttpHeaders(), status, request);
+    }
+    @ExceptionHandler(UsuarioEmpresaNotFoundException.class)
+    public ResponseEntity<?> handleUsuarioEmpresaNotFoundException(UsuarioEmpresaNotFoundException ex, WebRequest request){
         HttpStatus status = HttpStatus.NOT_FOUND;
         ProblemType problemType = ProblemType.ENTITY_NOT_FOUND;
         String message = ex.getMessage();

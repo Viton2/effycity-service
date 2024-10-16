@@ -31,7 +31,7 @@ public class UsuarioGestor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ColumnDefault("nextval('tb_usuario_gestor_pk_usuario_gestor_seq'")
     @Column(name = "pk_usuario_gestor", nullable = false)
-    private Integer id;
+    private Long id;
 
     @Size(max = 100)
     @NotNull

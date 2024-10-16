@@ -23,7 +23,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class ProjetoDTO {
-    private Integer id;
+    private Long id;
 
     @NotNull
     private UsuarioEmpresaDTO usuarioEmpresa;

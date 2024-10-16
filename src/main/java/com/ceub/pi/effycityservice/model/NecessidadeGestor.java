@@ -27,7 +27,7 @@ public class NecessidadeGestor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ColumnDefault("nextval('tb_necessidade_gestor_pk_necessidade_seq'")
     @Column(name = "pk_necessidade", nullable = false)
-    private Integer id;
+    private Long id;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

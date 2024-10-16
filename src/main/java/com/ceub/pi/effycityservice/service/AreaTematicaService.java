@@ -20,7 +20,7 @@ public class AreaTematicaService {
     }
 
     // Retrieve an AreaTematica by ID
-    public Optional<AreaTematica> getAreaTematicaById(Integer id) {
+    public Optional<AreaTematica> getAreaTematicaById(Long id) {
         return areaTematicaRepository.findById(id);
     }
 
@@ -30,7 +30,7 @@ public class AreaTematicaService {
     }
 
     // Delete an AreaTematica by ID
-    public void deleteAreaTematicaById(Integer id) {
+    public void deleteAreaTematicaById(Long id) {
         areaTematicaRepository.deleteById(id);
     }
 }

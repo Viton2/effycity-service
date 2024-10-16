@@ -71,13 +71,13 @@ public class ProjectService {
     }
 
     // Retrieve a Project by ID with DTO conversion
-    public Optional<ProjetoDTO> getProjetoById(Integer id) {
+    public Optional<ProjetoDTO> getProjetoById(Long id) {
         return projetoRepository.findById(id)
                 .map(this::convertToDTO);
     }
 
     // Update logic moved to the service layer
-    public Optional<ProjetoDTO> updateProjeto(Integer id, ProjetoDTO projetoDetails) {
+    public Optional<ProjetoDTO> updateProjeto(Long id, ProjetoDTO projetoDetails) {
         Optional<Projeto> existingProjetoOpt = projetoRepository.findById(id);
         if (existingProjetoOpt.isPresent()) {
             Projeto existingProjeto = existingProjetoOpt.get();
@@ -106,7 +106,7 @@ public class ProjectService {
 //    }
 
     // Delete a Project by ID
-    public void deleteProjetoById(Integer id) {
+    public void deleteProjetoById(Long id) {
         projetoRepository.deleteById(id);
     }
 }

@@ -6,6 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AreaTematicaDTO {
-    private Integer id;
+    private Long id;
     private String dsAreaTematica;
 }
