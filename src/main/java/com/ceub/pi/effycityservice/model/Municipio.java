@@ -1,5 +1,7 @@
 package com.ceub.pi.effycityservice.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -34,6 +36,7 @@ public class Municipio {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @ColumnDefault("nextval('tb_municipio_fk_estado_seq'")
     @JoinColumn(name = "fk_estado", nullable = false)
+//    @JsonBackReference()
     private Estado estado;
 
     @Size(max = 50)
@@ -45,6 +48,8 @@ public class Municipio {
     private Set<NecessidadeGestor> tbNecessidadeGestors = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "municipio")
+//    @JsonBackReference("usuario-municipio")
+    @JsonIgnore
     private Set<UsuarioGestor> tbUsuarioGestors = new LinkedHashSet<>();
 
 }

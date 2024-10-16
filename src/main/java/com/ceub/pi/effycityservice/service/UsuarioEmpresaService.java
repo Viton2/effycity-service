@@ -4,7 +4,6 @@ import com.ceub.pi.effycityservice.DTO.UsuarioEmpresaDTO;
 import com.ceub.pi.effycityservice.model.UsuarioEmpresa;
 import com.ceub.pi.effycityservice.repository.UsuarioEmpresaRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

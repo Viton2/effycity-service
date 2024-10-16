@@ -1,5 +1,6 @@
 package com.ceub.pi.effycityservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -38,12 +39,16 @@ public class Estado {
     private String noEstado;
 
     @OneToMany(mappedBy = "estado")
+//    @JsonBackReference
+    @JsonIgnore
     private Set<Municipio> tbMunicipios = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "estado")
     private Set<NecessidadeGestor> tbNecessidadeGestors = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "estado")
+//    @JsonBackReference("usuario-estado")
+    @JsonIgnore
     private Set<UsuarioGestor> tbUsuarioGestors = new LinkedHashSet<>();
 
 }

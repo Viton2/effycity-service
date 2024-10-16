@@ -5,7 +5,7 @@ import com.ceub.pi.effycityservice.exception.UsuarioGestorNotFoundException;
 import com.ceub.pi.effycityservice.model.UsuarioGestor;
 import com.ceub.pi.effycityservice.repository.UsuarioGestorRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -24,6 +24,7 @@ public class UsuarioGestorService {
     }
 
     private UsuarioGestorDTO convertToDTO(UsuarioGestor usuarioGestor) {
+        mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
         return mapper.convertValue(usuarioGestor, UsuarioGestorDTO.class);
     }
 

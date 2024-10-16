@@ -1,5 +1,7 @@
 package com.ceub.pi.effycityservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -57,12 +59,15 @@ public class UsuarioGestor {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @ColumnDefault("nextval('tb_usuario_gestor_fk_municipio_seq'")
     @JoinColumn(name = "fk_municipio", nullable = false)
+//    @JsonManagedReference("usuario-municipio")
     private Municipio municipio;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @ColumnDefault("nextval('tb_usuario_gestor_fk_estado_seq'")
     @JoinColumn(name = "fk_estado", nullable = false)
+//    @JsonManagedReference("usuario-estado")
+    @JsonIgnore
     private Estado estado;
 
     @OneToMany(mappedBy = "usuarioGestor")

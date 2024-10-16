@@ -19,7 +19,7 @@ public class UsuarioGestorController {
     private UsuarioGestorService usuarioGestorService;
 
     // Create a new UsuarioGestor
-    @PostMapping
+    @PostMapping(consumes = "application/json", produces = "application/json")
     public ResponseEntity<UsuarioGestor> createUsuarioGestor(@RequestBody UsuarioGestor usuarioGestor) {
         UsuarioGestor createdUsuarioGestor = usuarioGestorService.saveUsuarioGestor(usuarioGestor);
         return new ResponseEntity<>(createdUsuarioGestor, HttpStatus.CREATED);
