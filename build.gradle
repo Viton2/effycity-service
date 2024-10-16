@@ -36,6 +36,8 @@ dependencies {
     implementation "org.springframework.security:spring-security-oauth2-client"
     implementation group: 'org.springframework.security', name: 'spring-security-oauth2-jose', version: '6.3.3'
 
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '3.2.4'
+
     implementation 'org.flywaydb:flyway-core'
     implementation "org.flywaydb:flyway-database-postgresql"
 
