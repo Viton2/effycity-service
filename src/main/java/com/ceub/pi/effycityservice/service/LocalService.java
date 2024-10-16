@@ -1,9 +1,7 @@
 package com.ceub.pi.effycityservice.service;
 
-import com.ceub.pi.effycityservice.DTO.EstadoDTO;
 import com.ceub.pi.effycityservice.DTO.MunicipioDTO;
 import com.ceub.pi.effycityservice.exception.MunicipioNotFoundException;
-import com.ceub.pi.effycityservice.model.Estado;
 import com.ceub.pi.effycityservice.model.Municipio;
 import com.ceub.pi.effycityservice.repository.EstadoRepository;
 import com.ceub.pi.effycityservice.repository.MunicipioRepository;
