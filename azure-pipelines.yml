@@ -30,6 +30,7 @@ steps:
     export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
     export PATH=$JAVA_HOME/bin:$PATH
     ./gradlew build -x test
+    ls -la build/libs # Lista o conteúdo da pasta build/libs para verificar se o .jar foi gerado
   displayName: 'Build Projeto com Gradle'
 
 # Publica o artefato gerado no Azure DevOps para o próximo estágio (artefato é o JAR ou WAR)
