@@ -36,7 +36,7 @@ steps:
 # Publica o artefato gerado no Azure DevOps para o próximo estágio (artefato é o JAR ou WAR)
 - task: PublishBuildArtifacts@1
   inputs:
-    pathtoPublish: '$(System.DefaultWorkingDirectory)/build/libs/*.jar'
+    pathtoPublish: '$(System.DefaultWorkingDirectory)/build/libs/effycity-service-0.0.1-SNAPSHOT.jar'
     artifactName: 'drop'
 
 # Deploy no Azure App Service usando o artefato publicado
