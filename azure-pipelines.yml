@@ -26,7 +26,10 @@ steps:
   displayName: 'Conceder permissão de execução ao gradlew'
 
 # Build usando Gradle (substitua 'build' pela task Gradle apropriada, se necessário)
-- script: ./gradlew build -x test
+- script: |
+    export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
+    export PATH=$JAVA_HOME/bin:$PATH
+    ./gradlew build -x test
   displayName: 'Build Projeto com Gradle'
 
 # Publica o artefato gerado no Azure DevOps para o próximo estágio (artefato é o JAR ou WAR)
