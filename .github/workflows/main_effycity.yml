@@ -8,6 +8,9 @@ on:
     branches:
       - main
   workflow_dispatch:
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
@@ -19,17 +22,20 @@ jobs:
       - name: Set up Java version
         uses: actions/setup-java@v4
         with:
-          java-version: 'java21'
+          java-version: '21'
           distribution: 'microsoft'
+        # Conceder permissão de execução ao script Gradle Wrapper
+      - name: Grant execute permission for Gradle Wrapper
+        run: chmod +x ./gradlew
 
-      - name: Build with Maven
-        run: mvn clean install
+      - name: Build with Gradle
+        run: ./gradlew build -x test
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
-          name: java-app
-          path: '${{ github.workspace }}/target/*.jar'
+          name: effycity-service
+          path: '${{ github.workspace }}/build/libs/effycity-service-0.0.1-SNAPSHOT.jar'
 
   deploy:
     runs-on: ubuntu-latest
@@ -37,14 +43,12 @@ jobs:
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    permissions:
-      id-token: write #This is required for requesting the JWT
   
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
-          name: java-app
+          name: effycity-service
       
       - name: Login to Azure
         uses: azure/login@v2
@@ -59,5 +63,5 @@ jobs:
         with:
           app-name: 'Effycity'
           slot-name: 'Production'
-          package: '*.jar'
+          package: 'build/libs/effycity-service-0.0.1-SNAPSHOT.jar'
           
