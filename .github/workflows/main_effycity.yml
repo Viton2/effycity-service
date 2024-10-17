@@ -66,5 +66,5 @@ jobs:
         with:
           app-name: 'Effycity'
           slot-name: 'Production'
-          package: 'build/libs/effycity-service-0.0.1-SNAPSHOT.jar'
+          package: '$(System.DefaultWorkingDirectory)/build/libs/effycity-service-0.0.1-SNAPSHOT.jar'
           
