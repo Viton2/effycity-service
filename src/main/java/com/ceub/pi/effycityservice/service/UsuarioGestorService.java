@@ -1,5 +1,7 @@
 package com.ceub.pi.effycityservice.service;
 
+import com.ceub.pi.effycityservice.DTO.EstadoDTO;
+import com.ceub.pi.effycityservice.DTO.MunicipioDTO;
 import com.ceub.pi.effycityservice.DTO.UsuarioGestorDTO;
 import com.ceub.pi.effycityservice.exception.UsuarioGestorNotFoundException;
 import com.ceub.pi.effycityservice.model.UsuarioGestor;
@@ -23,10 +25,37 @@ public class UsuarioGestorService {
         this.mapper = mapper;
     }
 
-    private UsuarioGestorDTO convertToDTO(UsuarioGestor usuarioGestor) {
-        mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-        return mapper.convertValue(usuarioGestor, UsuarioGestorDTO.class);
+    public UsuarioGestorDTO toDTO(UsuarioGestor usuarioGestor) {
+        UsuarioGestorDTO dto = new UsuarioGestorDTO();
+
+        // Convertendo os atributos simples
+        dto.setId(usuarioGestor.getId());
+        dto.setUsuario(usuarioGestor.getUsuario());
+        dto.setEmail(usuarioGestor.getEmail());
+        dto.setCargo(usuarioGestor.getCargo());
+        dto.setOrgao(usuarioGestor.getOrgao());
+        dto.setTelefone(usuarioGestor.getTelefone());
+
+        // Convertendo o relacionamento Municipio para MunicipioDTO
+        if (usuarioGestor.getMunicipio() != null) {
+            MunicipioDTO municipioDTO = new MunicipioDTO();
+            municipioDTO.setId(usuarioGestor.getMunicipio().getId());
+            municipioDTO.setNoMunicipio(usuarioGestor.getMunicipio().getNoMunicipio());
+            dto.setMunicipio(municipioDTO);
+        }
+
+        // Convertendo o relacionamento Estado para EstadoDTO
+        if (usuarioGestor.getEstado() != null) {
+            EstadoDTO estadoDTO = new EstadoDTO();
+            estadoDTO.setId(usuarioGestor.getEstado().getId());
+            estadoDTO.setNoEstado(usuarioGestor.getEstado().getNoEstado());
+            estadoDTO.setSgEstado(usuarioGestor.getEstado().getSgEstado());
+            dto.setEstado(estadoDTO);
+        }
+
+        return dto;
     }
+
 
     private UsuarioGestor validateUsuarioGestorExists(Long id) {
         Optional<UsuarioGestor> usuarioGestor = usuarioGestorRepository.findById(id);
@@ -49,7 +78,7 @@ public class UsuarioGestorService {
     public List<UsuarioGestorDTO> getAllUsuarioGestores() {
         List<UsuarioGestor> all = usuarioGestorRepository.findAll();
         List<UsuarioGestorDTO> dtos = new ArrayList<>();
-        all.forEach(usuarioGestor -> dtos.add(convertToDTO(usuarioGestor)));
+        all.forEach(usuarioGestor -> dtos.add(toDTO(usuarioGestor)));
         return dtos;
     }
 

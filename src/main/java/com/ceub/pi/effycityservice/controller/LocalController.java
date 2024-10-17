@@ -26,7 +26,10 @@ public class LocalController {
     }
 
     @GetMapping("/municipios")
-    public ResponseEntity<Page<MunicipioDTO>> getAllCountiesFromStatePageable(@PageableDefault(sort = "noMunicipio", direction = Sort.Direction.ASC, size = 20) Pageable pageable, @RequestParam Long estadoId){
+    public ResponseEntity<Page<MunicipioDTO>> getAllCountiesFromStatePageable(
+            @PageableDefault(sort = "noMunicipio", direction = Sort.Direction.ASC, size = 20) Pageable pageable,
+            @RequestParam Long estadoId
+    ){
         Page<MunicipioDTO> counties = localService.getAllCountiesFromStatePageable(pageable, estadoId);
         return ResponseEntity.ok(counties);
     }

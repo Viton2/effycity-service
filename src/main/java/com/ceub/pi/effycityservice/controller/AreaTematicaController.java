@@ -2,7 +2,6 @@ package com.ceub.pi.effycityservice.controller;
 
 import com.ceub.pi.effycityservice.model.AreaTematica;
 import com.ceub.pi.effycityservice.service.AreaTematicaService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
