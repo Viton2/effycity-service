@@ -1,10 +1,12 @@
 package com.ceub.pi.effycityservice.DTO;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class AreaTematicaDTO {
     private Long id;
     private String dsAreaTematica;

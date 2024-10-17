@@ -1,10 +1,12 @@
 package com.ceub.pi.effycityservice.DTO;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class UsuarioGestorDTO {
     private Long id;
     private String usuario;

@@ -1,11 +1,15 @@
 package com.ceub.pi.effycityservice.DTO;
 
 import com.ceub.pi.effycityservice.model.Estado;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class EstadoDTO {
     private Long id;
     private String sgEstado;  // Sigla do estado (ex: "SP")

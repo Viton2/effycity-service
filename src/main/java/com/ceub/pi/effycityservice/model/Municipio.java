@@ -50,7 +50,6 @@ public class Municipio {
 
     @OneToMany(mappedBy = "municipio")
 //    @JsonBackReference("usuario-municipio")
-    @JsonIgnore
     private Set<UsuarioGestor> tbUsuarioGestors = new LinkedHashSet<>();
 
 }

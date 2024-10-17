@@ -49,3 +49,15 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+springBoot {
+    mainClass = 'com.ceub.pi.effycityservice.Application'
+}
+
+jar{
+    enabled = true
+}
+
+bootJar{
+    enabled = true
+}
