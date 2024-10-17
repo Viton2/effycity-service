@@ -17,14 +17,14 @@ steps:
     java -version
   displayName: 'Instalar JDK 21'
 
-# Build usando Gradle (substitua 'build' pela task Gradle apropriada, se necessário)
-- script: ./gradlew build -x test
-  displayName: 'Build Projeto com Gradle'
-  
   # Conceder permissão de execução ao script Gradle Wrapper
 - script: |
     chmod +x ./gradlew
   displayName: 'Conceder permissão de execução ao gradlew'
+
+# Build usando Gradle (substitua 'build' pela task Gradle apropriada, se necessário)
+- script: ./gradlew build -x test
+  displayName: 'Build Projeto com Gradle'
 
 # Publica o artefato gerado no Azure DevOps para o próximo estágio (artefato é o JAR ou WAR)
 - task: PublishBuildArtifacts@1
