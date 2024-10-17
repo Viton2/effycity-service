@@ -11,10 +11,11 @@ steps:
 - checkout: self
 
 # Instala o JDK 11 (ou outro JDK dependendo da sua aplicação)
-- task: UseJava@1
-  inputs:
-    versionSpec: '21'
-    jdkArchitectureOption: 'x64'
+- script: |
+    sudo apt-get update
+    sudo apt-get install -y openjdk-21-jdk
+    java -version
+  displayName: 'Instalar JDK 21'
 
 # Build usando Gradle (substitua 'build' pela task Gradle apropriada, se necessário)
 - script: ./gradlew build -x test
