@@ -11,6 +11,7 @@ on:
   pull_request:
     branches:
       - main
+      
 
 permissions:
   id-token: write  # Concede permissão para o id-token
