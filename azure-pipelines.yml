@@ -8,7 +8,7 @@ pool:
 
 steps:
 # Primeiro, verifica o código do repositório
-- task: Checkout@v2
+- checkout: self
 
 # Instala o JDK 11 (ou outro JDK dependendo da sua aplicação)
 - task: UseJava@1
