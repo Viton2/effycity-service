@@ -12,6 +12,10 @@ on:
     branches:
       - main
 
+permissions:
+  id-token: write  # Concede permissão para o id-token
+  contents: read   # Permite leitura do repositório
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -50,12 +54,12 @@ jobs:
         with:
           name: effycity-service
       
-      #- name: Login to Azure
-        #uses: azure/login@v2
-        #with:
-         # client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_6B47AB12DB4649CB8A6F5FA4ACB6668E }}
-        #  tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_236854CB6A2C4359983836373BFFC4E5 }}
-        #  subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_19341272404F4FB8B44F75E10CC25F43 }}
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_6B47AB12DB4649CB8A6F5FA4ACB6668E }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_236854CB6A2C4359983836373BFFC4E5 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_19341272404F4FB8B44F75E10CC25F43 }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
