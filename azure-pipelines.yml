@@ -44,4 +44,5 @@ steps:
   inputs:
     azureSubscription: 'effycity-azure'  # Nome da conexão configurada no Azure
     appName: 'Effycity'  # Nome da aplicação no App Service
-    package: '$(System.DefaultWorkingDirectory)/drop/*.jar'
+    package: '$(Pipeline.Workspace)/drop/effycity-service-0.0.1-SNAPSHOT.jar'  # Corrigir o caminho para o artefato correto
+
