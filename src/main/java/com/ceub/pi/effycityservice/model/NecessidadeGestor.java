@@ -35,6 +35,7 @@ public class NecessidadeGestor {
     @JoinColumn(name = "fk_usuario_gestor", nullable = false)
     private UsuarioGestor usuarioGestor;
 
+
     @Size(max = 100)
     @NotNull
     @Column(name = "no_necessidade", nullable = false, length = 100)
