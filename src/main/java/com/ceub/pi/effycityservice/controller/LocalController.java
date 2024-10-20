@@ -1,5 +1,6 @@
 package com.ceub.pi.effycityservice.controller;
 
+import com.ceub.pi.effycityservice.DTO.EstadoDTO;
 import com.ceub.pi.effycityservice.DTO.MunicipioDTO;
 import com.ceub.pi.effycityservice.model.Estado;
 import com.ceub.pi.effycityservice.model.Municipio;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/local")
@@ -38,5 +41,11 @@ public class LocalController {
     public ResponseEntity<Municipio> getMunicipioById(@PathVariable Long id){
         Municipio municipio = localService.getMunicipioById(id);
         return ResponseEntity.ok(municipio);
+    }
+
+    @GetMapping("/estados")
+    public ResponseEntity<List<EstadoDTO>> getAllEStados(){
+        List<EstadoDTO> getall = localService.getAllEstados();
+        return ResponseEntity.ok(getall);
     }
 }
