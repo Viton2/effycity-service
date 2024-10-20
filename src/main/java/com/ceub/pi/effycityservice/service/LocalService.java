@@ -50,6 +50,10 @@ public class LocalService {
         return convertModelPageToDtoPage(all);
     }
 
+    public List<Municipio> getAllMunicipiosFromState(Long estadoId){
+        return municipioRepository.findAllByEstadoId(estadoId);
+    }
+
     public Municipio getMunicipioById(Long id){
         return validateMunicipioExists(id);
     }
