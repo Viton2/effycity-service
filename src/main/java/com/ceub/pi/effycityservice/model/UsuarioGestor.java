@@ -65,7 +65,6 @@ public class UsuarioGestor {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @ColumnDefault("nextval('tb_usuario_gestor_fk_estado_seq'")
     @JoinColumn(name = "fk_estado", nullable = false)
-    @JsonIgnore
     private Estado estado;
 
 

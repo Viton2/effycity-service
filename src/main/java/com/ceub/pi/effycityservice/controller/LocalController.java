@@ -36,6 +36,13 @@ public class LocalController {
         Page<MunicipioDTO> counties = localService.getAllCountiesFromStatePageable(pageable, estadoId);
         return ResponseEntity.ok(counties);
     }
+    @GetMapping("/municipios/list")
+    public ResponseEntity<List<Municipio>> getAllCountiesFromStatePageable(
+            @RequestParam Long estadoId
+    ){
+        List<Municipio> counties = localService.getAllMunicipiosFromState(estadoId);
+        return ResponseEntity.ok(counties);
+    }
 
     @GetMapping("/municipios/{id}")
     public ResponseEntity<Municipio> getMunicipioById(@PathVariable Long id){
