@@ -56,8 +56,5 @@ public class UsuarioEmpresa {
     @Column(name = "ds_area_atuacao", length = 100)
     private String areaAtuacao;
 
-    @OneToMany(mappedBy = "usuarioEmpresa")
-    @JsonIgnore
-    private Set<Projeto> Projetos = new LinkedHashSet<>();
 
 }

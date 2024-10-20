@@ -30,10 +30,4 @@ public class AreaTematica {
     @Column(name = "ds_area_tematica", length = 100)
     private String dsAreaTematica;
 
-    @OneToMany(mappedBy = "areaTematica")
-    private Set<NecessidadeGestor> tbNecessidadeGestors = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "areaTematica")
-    private Set<Projeto> tbProjetos = new LinkedHashSet<>();
-
 }

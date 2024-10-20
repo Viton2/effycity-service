@@ -45,11 +45,5 @@ public class Municipio {
     @Column(name = "no_municipio", nullable = false, length = 50)
     private String noMunicipio;
 
-    @OneToMany(mappedBy = "municipio")
-    private Set<NecessidadeGestor> tbNecessidadeGestors = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "municipio")
-//    @JsonBackReference("usuario-municipio")
-    private Set<UsuarioGestor> tbUsuarioGestors = new LinkedHashSet<>();
 
 }
