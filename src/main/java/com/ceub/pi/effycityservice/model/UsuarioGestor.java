@@ -68,8 +68,5 @@ public class UsuarioGestor {
     @JsonIgnore
     private Estado estado;
 
-    @OneToMany(mappedBy = "usuarioGestor")
-    @JsonIgnore
-    private Set<NecessidadeGestor> necessidadeGestors = new LinkedHashSet<>();
 
 }

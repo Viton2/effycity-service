@@ -38,17 +38,5 @@ public class Estado {
     @Column(name = "no_estado", nullable = false, length = 50)
     private String noEstado;
 
-    @OneToMany(mappedBy = "estado")
-//    @JsonBackReference
-    @JsonIgnore
-    private Set<Municipio> tbMunicipios = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "estado")
-    private Set<NecessidadeGestor> tbNecessidadeGestors = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "estado")
-//    @JsonBackReference("usuario-estado")
-    @JsonIgnore
-    private Set<UsuarioGestor> tbUsuarioGestors = new LinkedHashSet<>();
 
 }
