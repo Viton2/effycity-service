@@ -101,4 +101,16 @@ public class NecessidadeGestorService {
         validateNecessidadeGestorExists(id);
         repository.deleteById(id);
     }
+
+    public NecessidadeGestorDTO updateNecessidadeGestor(Long id, NecessidadeGestor necessidadeForm) {
+        NecessidadeGestor necessidadeGestor = validateNecessidadeGestorExists(id);
+        necessidadeGestor.setNoNecessidade(necessidadeForm.getNoNecessidade());
+        necessidadeGestor.setDsNecessidade(necessidadeForm.getDsNecessidade());
+        necessidadeGestor.setUsuarioGestor(necessidadeForm.getUsuarioGestor());
+        necessidadeGestor.setEstado(necessidadeForm.getEstado());
+        necessidadeGestor.setAreaTematica(necessidadeForm.getAreaTematica());
+        necessidadeGestor.setMunicipio(necessidadeForm.getMunicipio());
+        necessidadeGestor.setNuCusto(necessidadeForm.getNuCusto());
+        return toDTO(repository.save(necessidadeGestor));
+    }
 }

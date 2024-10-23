@@ -3,6 +3,7 @@ package com.ceub.pi.effycityservice.controller;
 import com.ceub.pi.effycityservice.DTO.NecessidadeGestorDTO;
 import com.ceub.pi.effycityservice.model.NecessidadeGestor;
 import com.ceub.pi.effycityservice.service.NecessidadeGestorService;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,7 +29,7 @@ public class NecessidadeGestorController {
     }
 
     @PostMapping
-    public ResponseEntity<NecessidadeGestorDTO> createNecessidadeGestor(@RequestBody NecessidadeGestor necessidade) {
+    public ResponseEntity<NecessidadeGestorDTO> createNecessidadeGestor(@Valid @RequestBody NecessidadeGestor necessidade) {
         NecessidadeGestorDTO necessidadeGestor = service.createNecessidadeGestor(necessidade);
         return ResponseEntity.ok(necessidadeGestor);
     }
@@ -35,6 +37,12 @@ public class NecessidadeGestorController {
     @GetMapping("/{id}")
     public ResponseEntity<NecessidadeGestorDTO> getNecessidadeGestorById(@PathVariable Long id) {
         NecessidadeGestorDTO necessidadeGestorDTO = service.getNecessidadeGestorById(id);
+        return ResponseEntity.ok(necessidadeGestorDTO);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<NecessidadeGestorDTO> updateNecessidadeGestor(@PathVariable Long id, @RequestBody NecessidadeGestor necessidade) {
+        NecessidadeGestorDTO necessidadeGestorDTO = service.updateNecessidadeGestor(id, necessidade);
         return ResponseEntity.ok(necessidadeGestorDTO);
     }
 
