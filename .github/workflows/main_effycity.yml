@@ -61,8 +61,8 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_236854CB6A2C4359983836373BFFC4E5 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_19341272404F4FB8B44F75E10CC25F43 }}
 
-      - name: Troubleshooting
-        run: ls -la $(System.DefaultWorkingDirectory)
+      #- name: Troubleshooting
+      #  run: ls -la $(System.DefaultWorkingDirectory)
         
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
