@@ -29,7 +29,7 @@ public class NecessidadeGestorController {
     }
 
     @PostMapping
-    public ResponseEntity<NecessidadeGestorDTO> createNecessidadeGestor(@Valid @RequestBody NecessidadeGestor necessidade) {
+    public ResponseEntity<NecessidadeGestorDTO> createNecessidadeGestor(@RequestBody NecessidadeGestor necessidade) {
         NecessidadeGestorDTO necessidadeGestor = service.createNecessidadeGestor(necessidade);
         return ResponseEntity.ok(necessidadeGestor);
     }

@@ -9,6 +9,7 @@ import com.ceub.pi.effycityservice.repository.ProjectRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -29,6 +30,7 @@ public class ProjectService {
 
     // Create or Update a Project
     public Projeto saveProjeto(Projeto projeto) {
+        projeto.setDtCriacao(LocalDate.now());
         return projetoRepository.save(projeto);
     }
 
