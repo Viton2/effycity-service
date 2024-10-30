@@ -56,13 +56,13 @@ public class UsuarioGestor {
     private String telefone;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     @ColumnDefault("nextval('tb_usuario_gestor_fk_municipio_seq'")
     @JoinColumn(name = "fk_municipio", nullable = false)
     private Municipio municipio;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     @ColumnDefault("nextval('tb_usuario_gestor_fk_estado_seq'")
     @JoinColumn(name = "fk_estado", nullable = false)
     private Estado estado;

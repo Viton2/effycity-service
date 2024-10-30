@@ -53,8 +53,7 @@ public class UsuarioGestorController {
     @GetMapping("/{id}")
     public ResponseEntity<UsuarioGestor> getUsuarioGestorById(@PathVariable Long id) {
         Optional<UsuarioGestor> usuarioGestor = usuarioGestorService.getUsuarioGestorById(id);
-        return usuarioGestor.map(ResponseEntity::ok)
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        return new ResponseEntity<>(usuarioGestor.get(), HttpStatus.OK);
     }
 
     // Get all UsuarioGestores
