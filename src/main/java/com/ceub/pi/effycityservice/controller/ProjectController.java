@@ -1,8 +1,10 @@
 package com.ceub.pi.effycityservice.controller;
 
 import com.ceub.pi.effycityservice.DTO.ProjetoDTO;
+import com.ceub.pi.effycityservice.form.ProjetoForm;
 import com.ceub.pi.effycityservice.model.Projeto;
 import com.ceub.pi.effycityservice.service.ProjectService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,7 +32,7 @@ public class ProjectController {
 
     // Create a new Project
     @PostMapping
-    public ResponseEntity<Projeto> createProjeto(@RequestBody Projeto projeto) {
+    public ResponseEntity<Projeto> createProjeto(@Valid @RequestBody ProjetoForm projeto) {
         Projeto createdProjeto = projetoService.saveProjeto(projeto);
         return new ResponseEntity<>(createdProjeto, HttpStatus.CREATED);
     }

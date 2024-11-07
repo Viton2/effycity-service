@@ -1,5 +1,6 @@
 package com.ceub.pi.effycityservice.service;
 
+import com.ceub.pi.effycityservice.exception.AreaTematicaNotFoundException;
 import com.ceub.pi.effycityservice.model.AreaTematica;
 import com.ceub.pi.effycityservice.repository.AreaTematicaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,13 @@ public class AreaTematicaService {
     // Create or Update an AreaTematica
     public AreaTematica saveAreaTematica(AreaTematica areaTematica) {
         return areaTematicaRepository.save(areaTematica);
+    }
+
+    public AreaTematica validateAreaTematicaExists(Long areaTematicaId) {
+        Optional<AreaTematica> areaTematica = areaTematicaRepository.findById(areaTematicaId);
+        if (areaTematica.isPresent()) {
+            return areaTematica.get();
+        }throw new AreaTematicaNotFoundException();
     }
 
     // Retrieve an AreaTematica by ID

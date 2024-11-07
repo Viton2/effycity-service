@@ -3,6 +3,8 @@ package com.ceub.pi.effycityservice.service;
 import com.ceub.pi.effycityservice.DTO.AreaTematicaDTO;
 import com.ceub.pi.effycityservice.DTO.ProjetoDTO;
 import com.ceub.pi.effycityservice.DTO.UsuarioEmpresaDTO;
+import com.ceub.pi.effycityservice.exception.ProjectNotFoundException;
+import com.ceub.pi.effycityservice.form.ProjetoForm;
 import com.ceub.pi.effycityservice.model.Projeto;
 import com.ceub.pi.effycityservice.model.UsuarioEmpresa;
 import com.ceub.pi.effycityservice.repository.ProjectRepository;
@@ -19,19 +21,37 @@ public class ProjectService {
 
     private final ProjectRepository projetoRepository;
     private final ObjectMapper mapper;
+    private final UsuarioEmpresaService usuarioEmpresaService;
+    private final AreaTematicaService areaTematicaService;
 
-    public ProjectService(ProjectRepository projetoRepository, ObjectMapper mapper) {
+    public ProjectService(ProjectRepository projetoRepository, ObjectMapper mapper, UsuarioEmpresaService usuarioEmpresaService, AreaTematicaService areaTematicaService) {
         this.projetoRepository = projetoRepository;
         this.mapper = mapper;
+        this.usuarioEmpresaService = usuarioEmpresaService;
+        this.areaTematicaService = areaTematicaService;
     }
+
     private UsuarioEmpresa convertUsuarioEmpresaDTOtoModel(UsuarioEmpresaDTO usuarioDTO){
         return mapper.convertValue(usuarioDTO, UsuarioEmpresa.class);
     }
+    private Projeto convertProjetoFormtoModel(ProjetoForm form){
+        return mapper.convertValue(form, Projeto.class);
+    }
 
     // Create or Update a Project
-    public Projeto saveProjeto(Projeto projeto) {
-        projeto.setDtCriacao(LocalDate.now());
+    public Projeto saveProjeto(ProjetoForm projetoForm) {
+        projetoForm.setDtCriacao(LocalDate.now());
+        Projeto projeto = convertProjetoFormtoModel(projetoForm);
+        areaTematicaService.validateAreaTematicaExists(projetoForm.getAreaTematica().getId());
+        usuarioEmpresaService.validateUsuarioEmpresaExists(projetoForm.getUsuarioEmpresa().getId());
         return projetoRepository.save(projeto);
+    }
+
+    private Optional<Projeto> validateProjetoExists(Long id){
+        Optional<Projeto> projeto = projetoRepository.findById(id);
+        if(projeto.isPresent()){
+            return projeto;
+        }throw new ProjectNotFoundException();
     }
 
 
@@ -74,13 +94,13 @@ public class ProjectService {
 
     // Retrieve a Project by ID with DTO conversion
     public Optional<ProjetoDTO> getProjetoById(Long id) {
-        return projetoRepository.findById(id)
+        return validateProjetoExists(id)
                 .map(this::convertToDTO);
     }
 
     // Update logic moved to the service layer
     public Optional<ProjetoDTO> updateProjeto(Long id, ProjetoDTO projetoDetails) {
-        Optional<Projeto> existingProjetoOpt = projetoRepository.findById(id);
+        Optional<Projeto> existingProjetoOpt = validateProjetoExists(id);
         if (existingProjetoOpt.isPresent()) {
             Projeto existingProjeto = existingProjetoOpt.get();
             existingProjeto.setNoProjeto(projetoDetails.getNoProjeto());
@@ -109,6 +129,7 @@ public class ProjectService {
 
     // Delete a Project by ID
     public void deleteProjetoById(Long id) {
+        validateProjetoExists(id);
         projetoRepository.deleteById(id);
     }
 }
