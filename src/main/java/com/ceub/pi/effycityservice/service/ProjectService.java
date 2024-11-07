@@ -93,7 +93,7 @@ public class ProjectService {
             // and AreaTematicaDTO to the entity (left that implementation to you)
             // For now, just setting the IDs as reference
             existingProjeto.setUsuarioEmpresa(convertUsuarioEmpresaDTOtoModel(projetoDetails.getUsuarioEmpresa()));
-            existingProjeto.getAreaTematica().setId(projetoDetails.getAreaTematica().getId());
+            existingProjeto.setAreaTematica(AreaTematicaDTO.convertToModel(projetoDetails.getAreaTematica()));
 
             Projeto updatedProjeto = projetoRepository.save(existingProjeto);
             return Optional.of(convertToDTO(updatedProjeto));
