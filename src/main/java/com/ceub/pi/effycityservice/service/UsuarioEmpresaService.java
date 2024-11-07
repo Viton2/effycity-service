@@ -26,7 +26,7 @@ public class UsuarioEmpresaService {
         return mapper.convertValue(usuarioEmpresa, UsuarioEmpresaDTO.class);
     }
 
-    private Optional<UsuarioEmpresa> validateUsuarioEmpresaExists(Long id) {
+    public Optional<UsuarioEmpresa> validateUsuarioEmpresaExists(Long id) {
         Optional<UsuarioEmpresa> usuarioEmpresa = usuarioEmpresaRepository.findById(id);
         if (usuarioEmpresa.isPresent()){
             return usuarioEmpresa;

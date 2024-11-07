@@ -2,6 +2,7 @@ package com.ceub.pi.effycityservice.controller;
 
 import com.ceub.pi.effycityservice.model.AreaTematica;
 import com.ceub.pi.effycityservice.service.AreaTematicaService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,7 +35,7 @@ public class AreaTematicaController {
 
     // Create a new AreaTematica
     @PostMapping
-    public ResponseEntity<AreaTematica> createAreaTematica(@RequestBody AreaTematica areaTematica) {
+    public ResponseEntity<AreaTematica> createAreaTematica(@Valid @RequestBody AreaTematica areaTematica) {
         AreaTematica createdAreaTematica = areaTematicaService.saveAreaTematica(areaTematica);
         return new ResponseEntity<>(createdAreaTematica, HttpStatus.CREATED);
     }

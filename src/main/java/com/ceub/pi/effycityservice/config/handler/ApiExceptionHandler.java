@@ -1,8 +1,10 @@
 package com.ceub.pi.effycityservice.config.handler;
 
+import com.ceub.pi.effycityservice.exception.AreaTematicaNotFoundException;
 import com.ceub.pi.effycityservice.exception.EstadoNotFoundException;
 import com.ceub.pi.effycityservice.exception.MunicipioNotFoundException;
 import com.ceub.pi.effycityservice.exception.NecessidadeGestorNotFoundException;
+import com.ceub.pi.effycityservice.exception.ProjectNotFoundException;
 import com.ceub.pi.effycityservice.exception.UsuarioEmpresaNotFoundException;
 import com.ceub.pi.effycityservice.exception.UsuarioGestorNotFoundException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
@@ -40,6 +42,14 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         ApiError apiError = createProblemBuilder(status, problemType, message).build();
         return handleExceptionInternal(ex, apiError, new HttpHeaders(), status, request);
     }
+    @ExceptionHandler(ProjectNotFoundException.class)
+    public ResponseEntity<?> handleProjectNotFoundException(ProjectNotFoundException ex, WebRequest request){
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        ProblemType problemType = ProblemType.ENTITY_NOT_FOUND;
+        String message = ex.getMessage();
+        ApiError apiError = createProblemBuilder(status, problemType, message).build();
+        return handleExceptionInternal(ex, apiError, new HttpHeaders(), status, request);
+    }
     @ExceptionHandler(MunicipioNotFoundException.class)
     public ResponseEntity<?> handleMunicipioNotFoundException(MunicipioNotFoundException ex, WebRequest request){
         HttpStatus status = HttpStatus.NOT_FOUND;
@@ -66,6 +76,14 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     }
     @ExceptionHandler(NecessidadeGestorNotFoundException.class)
     public ResponseEntity<?> handleNecessidadeGestorNotFoundException(NecessidadeGestorNotFoundException ex, WebRequest request){
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        ProblemType problemType = ProblemType.ENTITY_NOT_FOUND;
+        String message = ex.getMessage();
+        ApiError apiError = createProblemBuilder(status, problemType, message).build();
+        return handleExceptionInternal(ex, apiError, new HttpHeaders(), status, request);
+    }
+    @ExceptionHandler(AreaTematicaNotFoundException.class)
+    public ResponseEntity<?> handleAreaTematicaNotFoundException(AreaTematicaNotFoundException ex, WebRequest request){
         HttpStatus status = HttpStatus.NOT_FOUND;
         ProblemType problemType = ProblemType.ENTITY_NOT_FOUND;
         String message = ex.getMessage();
