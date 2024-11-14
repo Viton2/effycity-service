@@ -24,7 +24,6 @@ import java.util.Set;
 public class UsuarioEmpresa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ColumnDefault("nextval('tb_usuario_empresa_pk_usuario_empresa_seq'")
     @Column(name = "pk_usuario_empresa", nullable = false)
     private Long id;
 
