@@ -23,7 +23,7 @@ import java.util.Set;
 @Table(name = "tb_usuario_empresa")
 public class UsuarioEmpresa {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "pk_usuario_empresa", nullable = false)
     private Long id;
 
