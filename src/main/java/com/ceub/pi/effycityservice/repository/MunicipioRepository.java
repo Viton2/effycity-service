@@ -12,5 +12,5 @@ public interface MunicipioRepository extends JpaRepository<Municipio, Long> {
 
     Page<Municipio> findAllByEstadoId(Pageable pageable, @Param("estadoId") Long estadoId);
 
-    List<Municipio> findAllByEstadoId(@Param("estadoId") Long estadoId);
+    List<Municipio> findAllByEstadoIdOrderByNoMunicipioAsc(@Param("estadoId") Long estadoId);
 }

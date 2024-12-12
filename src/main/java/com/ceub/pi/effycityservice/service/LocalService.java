@@ -51,7 +51,7 @@ public class LocalService {
     }
 
     public List<Municipio> getAllMunicipiosFromState(Long estadoId){
-        return municipioRepository.findAllByEstadoId(estadoId);
+        return municipioRepository.findAllByEstadoIdOrderByNoMunicipioAsc(estadoId);
     }
 
     public Municipio getMunicipioById(Long id){
@@ -59,7 +59,7 @@ public class LocalService {
     }
 
     public List<EstadoDTO> getAllEstados() {
-        List<Estado> estados = estadoRepository.findAll();
+        List<Estado> estados = estadoRepository.findAllOrderByNoEstadoAsc();
         List<EstadoDTO> estadoDTOS = new ArrayList<>();
         estados.forEach(estado -> estadoDTOS.add(convertModelListToDtoList(estado)));
         return estadoDTOS;
